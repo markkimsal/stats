@@ -1,0 +1,55 @@
+Installation of piwik module.
+================================================================================
+
+I. Tracking
+================================================================================
+To use the system for just tracking, just add the following to your boot/local/layout.ini
+
+
+[object]
+footer.track=@sys.path@/modules/stats/piwik.php:Cgn_Service_Stats_Piwik:piwik_track:setTrackingBug
+footer.track.home=@sys.path@/modules/stats/piwik.php:Cgn_Service_Stats_Piwik:piwik_track:setTrackingBugHome
+
+Then, in your template file place the following PHP near the bottom of the page.
+
+				<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
+
+Or, you can add this to your special home.html.php template file.
+
+				<?php Cgn_Template::parseTemplateSection('footer.track.home'); ?>
+
+This block simply appends the word "Home" to the title of your page.  In case any two pages have the 
+exact same title, this will differentiate the home page.
+
+
+
+II. Showing Stats
+================================================================================
+Showing Stats is disabled for versions of piwik after 0.3.0
+
+To show a simple graph of your visitors for the last 6 days, add the following to your boot/local/layout.ini
+
+[object]
+side.stats=@sys.path@/../../local-modules/stats/piwik.php:Cgn_Service_Stats_Piwik:piwik_stats:showGraphVisits
+
+[config]
+piwik.host=stats.example.com
+piwik.path=/stats/piwik/
+piwik.siteid=1
+piwik.authtoken=XXXXXXXXXXXXXx
+
+
+Then, in your template file place the following PHP near the bottom of the page.
+
+				<?php Cgn_Template::parseTemplateSection('side.stats'); ?>
+
+
+This will shield your private authtoken from end-users by proxying the call for the data 
+through cognifty itself.  
+
+
+IMPORTANT
+================================================================================
+You will need to install the open-flash-chart.swf into your /media/ folder only 
+for showing stats, not collecting them.  This swf comes with piwik.
+
