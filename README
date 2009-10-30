@@ -1,14 +1,24 @@
-Installation of piwik module.
+Installation of Stats Module
 ================================================================================
 
-I. Tracking
+I.   Tracking for Piwik
+II.  Showing Stats for Piwik
+III. Tracking for Clickheat
+IV.  Tracking for Google Analytics
+
+I. Tracking for Piwik
 ================================================================================
 To use the system for just tracking, just add the following to your boot/local/layout.ini
-
 
 [object]
 footer.track=@sys.path@/modules/stats/piwik.php:Cgn_Service_Stats_Piwik:piwik_track:setTrackingBug
 footer.track.home=@sys.path@/modules/stats/piwik.php:Cgn_Service_Stats_Piwik:piwik_track:setTrackingBugHome
+
+[config]
+piwik.host=stats.example.com
+piwik.path=/stats/piwik/
+piwik.siteid=1
+
 
 Then, in your template file place the following PHP near the bottom of the page.
 
@@ -23,9 +33,9 @@ exact same title, this will differentiate the home page.
 
 
 
-II. Showing Stats
+II. Showing Stats for Piwik
 ================================================================================
-Showing Stats is disabled for versions of piwik after 0.3.0
+ ** Showing Stats is disabled for versions of piwik after 0.3.0 **
 
 To show a simple graph of your visitors for the last 6 days, add the following to your boot/local/layout.ini
 
@@ -33,11 +43,7 @@ To show a simple graph of your visitors for the last 6 days, add the following t
 side.stats=@sys.path@/../../local-modules/stats/piwik.php:Cgn_Service_Stats_Piwik:piwik_stats:showGraphVisits
 
 [config]
-piwik.host=stats.example.com
-piwik.path=/stats/piwik/
-piwik.siteid=1
 piwik.authtoken=XXXXXXXXXXXXXx
-
 
 Then, in your template file place the following PHP near the bottom of the page.
 
@@ -52,4 +58,42 @@ IMPORTANT
 ================================================================================
 You will need to install the open-flash-chart.swf into your /media/ folder only 
 for showing stats, not collecting them.  This swf comes with piwik.
+
+
+III. Tracking for Clickheat
+================================================================================
+To use the system for just tracking with "clickheat", just add the following to 
+your boot/local/layout.ini
+
+See: http://www.labsmedia.com/clickheat/index.html
+
+[object]
+footer.track=@sys.path@/modules/stats/clickheat.php:Cgn_Service_Stats_Clickheat:clickheat_track:setTrackingBug
+
+[config]
+clickheat.host=stats.example.com
+clickheat.path=/clickheat/
+
+Then, in your template file place the following PHP near the bottom of the page.
+
+				<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
+
+
+IV.  Tracking for Google Analytics
+================================================================================
+To use the system for just tracking with Google Analytics, just add the 
+following to your boot/local/layout.ini
+
+See http://www.google.com/analytics/
+
+[object]
+footer.track=@sys.path@/modules/stats/clickheat.php:Cgn_Service_Stats_Clickheat:clickheat_track:setTrackingBug
+
+[config]
+googleanalytics.id=UA-XXXXX-1
+
+Then, in your template file place the following PHP near the bottom of the page.
+
+				<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
+
 
