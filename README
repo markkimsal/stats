@@ -22,11 +22,11 @@ piwik.siteid=1
 
 Then, in your template file place the following PHP near the bottom of the page.
 
-				<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
+		<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
 
 Or, you can add this to your special home.html.php template file.
 
-				<?php Cgn_Template::parseTemplateSection('footer.track.home'); ?>
+		<?php Cgn_Template::parseTemplateSection('footer.track.home'); ?>
 
 This block simply appends the word "Home" to the title of your page.  In case any two pages have the 
 exact same title, this will differentiate the home page.
@@ -47,7 +47,7 @@ piwik.authtoken=XXXXXXXXXXXXXx
 
 Then, in your template file place the following PHP near the bottom of the page.
 
-				<?php Cgn_Template::parseTemplateSection('side.stats'); ?>
+		<?php Cgn_Template::parseTemplateSection('side.stats'); ?>
 
 
 This will shield your private authtoken from end-users by proxying the call for the data 
@@ -76,7 +76,7 @@ clickheat.path=/clickheat/
 
 Then, in your template file place the following PHP near the bottom of the page.
 
-				<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
+		<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
 
 
 IV.  Tracking for Google Analytics
@@ -87,13 +87,13 @@ following to your boot/local/layout.ini
 See http://www.google.com/analytics/
 
 [object]
-footer.track=@sys.path@/modules/stats/clickheat.php:Cgn_Service_Stats_Clickheat:clickheat_track:setTrackingBug
+footer.track=@sys.path@/modules/stats/googleanalytics.php:Cgn_Service_Stats_Googleanalytics:ga_track:setTrackingBug
 
 [config]
 googleanalytics.id=UA-XXXXX-1
 
 Then, in your template file place the following PHP near the bottom of the page.
 
-				<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
+		<?php Cgn_Template::parseTemplateSection('footer.track'); ?>
 
 
